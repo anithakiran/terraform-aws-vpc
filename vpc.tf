@@ -1,6 +1,5 @@
 #vpc code
 resource "aws_vpc" "main" {
-
     cidr_block = var.vpc_cidr
     instance_tenancy = "default"
     enable_dns_hostnames = var.enable_dns_hostnames 
@@ -179,3 +178,15 @@ resource "aws_route_table_association" "database" {
     route_table_id = aws_route_table.database.id 
 }
 
+resource "aws_db_subnet_group" "default" {
+  name       = "${local.resource_name}"
+  subnet_ids = aws_subnet.database[*].id
+
+  tags = merge (
+     var.common_tags,
+     var.database_subnet_group_tags,
+     {
+        Name = "${local.resource_name}"
+     }
+  )
+}

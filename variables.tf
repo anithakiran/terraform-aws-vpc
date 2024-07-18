@@ -101,3 +101,23 @@ variable "database_route_table_tags" {
   default = {} 
 }
 
+
+variable "is_peering_required" {
+  type = bool
+  default = true
+}
+
+variable "accpector_vpc_id" {
+  type = string
+  default = "" #don't give space
+}
+
+variable "vpc_peering_tags" {
+  type = map
+  default = {}
+}
+    
+variable "database_subnet_group_tags" {
+  type = map
+  default = {}
+}
